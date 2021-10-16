@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron')
-const { autoUpdater } = require("electron-updater")
+const { autoUpdater } = require("electron-updater") 
 const path = require('path')
-
+require('electron-reload')(__dirname);
 autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml');
 console.log(path.join(__dirname, 'dev-app-update.yml'))
 
