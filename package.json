@@ -1,37 +1,38 @@
 {
-    "name": "auto-updater",
-    "version": "1.0.6",
-    "description": "Electron app auto updater",
-    "main": "main.js",
-    "scripts": {
-      "start": "NODE_ENV=development electron .",
-      "pack": "electron-builder --dir",
-      "dist": "electron-builder",
-      "postinstall": "electron-builder install-app-deps",
-      "release": "electron-builder build"
+  "name": "auto-updater",
+  "version": "1.0.6",
+  "description": "Electron app auto updater",
+  "main": "main.js",
+  "scripts": {
+    "start": "NODE_ENV=development electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "release": "electron-builder build"
+  },
+  "build": {
+    "appId": "com.electron.autoupdater",
+    "productName": "AutoUpdater",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "type": "distribution"
     },
-    "build": {
-      "appId": "com.electron.autoupdater",
-      "productName": "AutoUpdater",
-      "mac": {
-        "category": "public.app-category.developer-tools",
-        "type": "distribution"
-      },
-      "publish": {
-        "provider": "github"
-      }
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/brunnogrillo/autoUpdater.git"
-    },
-    "author": "Brunno Grillo",
-    "devDependencies": {
-      "electron": "^8.2.0",
-      "electron-builder": "^22.4.1"
-    },
-    "dependencies": {
-      "electron-updater": "^4.3.1"
-    },
-    "license": "ISC"
-  }
+    "publish": {
+      "provider": "github"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brunnogrillo/autoUpdater.git"
+  },
+  "author": "Brunno Grillo",
+  "devDependencies": {
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1"
+  },
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-updater": "^4.3.1"
+  },
+  "license": "ISC"
+}

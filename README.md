@@ -2,3 +2,6 @@
 Auto updating electron app
 
 `yarn install`
+
+
+`yarn start`
