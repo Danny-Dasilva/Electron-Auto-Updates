@@ -7,7 +7,7 @@
     "start": "NODE_ENV=development electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "build": "electron-builder --mac --windows --linux",
+    "build": "electron-builder --windows --linux",
     "postinstall": "electron-builder install-app-deps",
     "release": "electron-builder --mac --windows --linux --publish always"
   },
