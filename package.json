@@ -1,21 +1,29 @@
 {
   "name": "auto-updater",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Electron app auto updater",
   "main": "main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
+    "build": "electron-builder --mac --windows --linux",
     "postinstall": "electron-builder install-app-deps",
-    "release": "electron-builder build"
+    "release": "electron-builder --mac --windows --linux --publish always"
   },
   "build": {
     "appId": "com.electron.autoupdater",
-    "productName": "AutoUpdater",
+    "productName": "ElectronAutoUpdates",
     "mac": {
       "category": "public.app-category.developer-tools",
       "type": "distribution"
+    },
+    "dmg": {
+        "icon": false
+    },
+    "linux": {
+        "target": ["AppImage"],
+        "category": "Office"
     },
     "publish": {
       "provider": "github"
