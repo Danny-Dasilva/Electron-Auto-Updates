@@ -1,0 +1,59 @@
+name: "🔧 🚀 🟢 Manual publish"
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseCandidate:
+        description: "Release Candidate"
+        required: true
+        default: "patch"
+obs:
+  release:
+    name: 🚀 Manual publish
+   runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - name: set github name
+          run: git config --global user.name 'Danny-Dasilva'
+      - name: set github  email
+        run: git config --global user.email 'secrets.EMAIL'
+      
+      - name: Get Package Name
+        run: |
+          echo "PACKAGE_NAME=$(node -p "try { require('./package.json').name } catch(e) {}")" >> $GITHUB_ENV
+        id: package
+
+      - name: Retrieve Latest Version
+        run: |
+          echo "::set-output name=CURRENT_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
+        id: version
+
+      - name: Update to latest version
+        run: |
+          npm version ${{ steps.version.outputs.CURRENT_VERSION }} --allow-same-version
+      - name: bump version
+        run: |
+          if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
+              npm version prerelease --preid alpha
+          fi
+          if [[ "${{ github.event.inputs.releaseCandidate }}" == "beta" ]]; then
+              npm version prerelease --preid beta
+          fi
+          if [[ "${{ github.event.inputs.releaseCandidate }}" == "patch" ]]; then
+              npm version patch
+          fi
+      - name: Get Updated Version
+        run: |
+          echo "::set-output name=UPDATED_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
+        id: version
+
+
+  
+      - name: Commit Version Bump
+        run: git commit -am v${{ steps.version.outputs.UPDATED_VERSION }}
+      - name: Tag commit
+        run: git tag v${{ steps.version.outputs.UPDATED_VERSION }}
+      - name: Push git
+        run: git push && git push --tags
