@@ -10,11 +10,16 @@ on:
 jobs:
   release:
     name: 🚀 Manual publish
-   runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
       - name: set github name
           run: git config --global user.name 'Danny-Dasilva'
       - name: set github  email
