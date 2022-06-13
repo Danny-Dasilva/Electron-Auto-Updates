@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - name: set github name
-          run: git config --global user.name 'Danny-Dasilva'
+        run: git config --global user.name 'Danny-Dasilva'
       - name: set github  email
         run: git config --global user.email 'secrets.EMAIL'
       
