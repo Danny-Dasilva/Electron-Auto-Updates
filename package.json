@@ -18,8 +18,10 @@
       "type": "distribution"
     },
     "linux": {
-        "target": ["AppImage"],
-        "category": "Office"
+      "target": [
+        "AppImage"
+      ],
+      "category": "Office"
     },
     "publish": {
       "provider": "github"
