@@ -43,7 +43,7 @@ jobs:
               npm version prerelease --preid beta
           fi
           if [[ "${{ github.event.inputs.releaseCandidate }}" == "patch" ]]; then
-              npm version patch
+              npm version patch -m "v%s"
           fi
 
 
