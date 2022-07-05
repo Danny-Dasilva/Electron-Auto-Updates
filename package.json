@@ -23,8 +23,12 @@
       ],
       "category": "Office"
     },
+    "win": {
+      "target": "squirrel"
+    },
     "publish": {
-      "provider": "github"
+      "provider": "github",
+      "releaseType": "release"
     }
   },
   "repository": {
