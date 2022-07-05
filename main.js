@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const { autoUpdater } = require("electron-updater") 
 const path = require('path')
 require('electron-reload')(__dirname);
@@ -14,7 +14,9 @@ const dispatch = (data) => {
 const createDefaultWindow = () => {
   win = new BrowserWindow({
     webPreferences: {
-        nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      contextIsolation: false,
     }
   })
 
@@ -40,7 +42,6 @@ app.on('ready', () => {
   createDefaultWindow()
 
   autoUpdater.checkForUpdatesAndNotify()
-
   win.webContents.on('did-finish-load', () => {
     win.webContents.send('version', app.getVersion())
   })
@@ -82,3 +83,7 @@ autoUpdater.on('download-progress', (progressObj) => {
 autoUpdater.on('update-downloaded', (info) => {
   dispatch('Update downloaded')
 })
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
