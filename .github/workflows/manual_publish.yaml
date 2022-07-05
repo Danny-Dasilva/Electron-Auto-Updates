@@ -19,6 +19,8 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+
       - name: Install deps
         run: yarn install
       - name: set github name
@@ -32,9 +34,9 @@ jobs:
           echo "CURRENT_VERSION=$(node -p "try { require('./package.json').version } catch(e) {}")" >> $GITHUB_ENV
         id: current
 
-      - name: Update to latest version
-        run: |
-          npm version ${{ env.CURRENT_VERSION }} --allow-same-version
+      # - name: Update to latest version
+      #   run: |
+      #     npm version ${{ env.CURRENT_VERSION }} --allow-same-version
       - name: bump version
         run: |
           if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
