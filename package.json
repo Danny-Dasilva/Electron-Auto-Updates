@@ -8,7 +8,8 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps",
-    "release": "electron-builder --windows --linux --publish always"
+    "release": "electron-builder --windows --linux --publish always",
+    "make-canary": "build --config electron-builder-canary.yml"
   },
   "build": {
     "appId": "com.electron.autoupdater",
