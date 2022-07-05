@@ -19,7 +19,8 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org
           token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-
+      - name: Install deps
+        run: yarn install
       - name: set github name
         run: git config --global user.name 'Danny-Dasilva'
       - name: set github  email
@@ -58,4 +59,4 @@ jobs:
           release: True
 
       - name: Push git
-        run: git push && git push --tags
+        run: git push
