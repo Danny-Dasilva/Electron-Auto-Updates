@@ -25,19 +25,15 @@ jobs:
       - name: set github  email
         run: git config --global user.email 'secrets.EMAIL'
       
-      - name: Get Package Name
+  
+      - name: Retrieve Current Version
         run: |
-          echo "PACKAGE_NAME=$(node -p "try { require('./package.json').name } catch(e) {}")" >> $GITHUB_ENV
-        id: package
-
-      - name: Retrieve Latest Version
-        run: |
-          echo "::set-output name=CURRENT_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
+          echo "CURRENT_VERSION=$(node -p "try { require('./package.json').version } catch(e) {}")" >> $GITHUB_ENV
         id: current
 
       - name: Update to latest version
         run: |
-          npm version ${{ steps.current.outputs.CURRENT_VERSION }} --allow-same-version
+          npm version ${{ env.CURRENT_VERSION }} --allow-same-version
       - name: bump version
         run: |
           if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
@@ -51,14 +47,15 @@ jobs:
           fi
       - name: Get Updated Version
         run: |
-          echo "::set-output name=UPDATED_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
+          echo "UPDATED_VERSION=$(node -p "try { require('./package.json').version } catch(e) {}")" >> $GITHUB_ENV
         id: version
 
 
-  
+      - name: Add file
+        run: git add *
       - name: Commit Version Bump
-        run: git commit -am v${{ steps.version.outputs.UPDATED_VERSION }}
+        run: git commit -am v${{ env.UPDATED_VERSION }}
       - name: Tag commit
-        run: git tag v${{ steps.version.outputs.UPDATED_VERSION }}
+        run: git tag v${{ env.UPDATED_VERSION }}
       - name: Push git
         run: git push && git push --tags
