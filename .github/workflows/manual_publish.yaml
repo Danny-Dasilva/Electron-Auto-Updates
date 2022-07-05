@@ -33,11 +33,11 @@ jobs:
       - name: Retrieve Latest Version
         run: |
           echo "::set-output name=CURRENT_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
-        id: version
+        id: current
 
       - name: Update to latest version
         run: |
-          npm version ${{ steps.version.outputs.CURRENT_VERSION }} --allow-same-version
+          npm version ${{ steps.current.outputs.CURRENT_VERSION }} --allow-same-version
       - name: bump version
         run: |
           if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
