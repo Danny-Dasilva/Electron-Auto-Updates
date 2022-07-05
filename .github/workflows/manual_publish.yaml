@@ -58,5 +58,5 @@ jobs:
           # release the app after building
           release: True
 
-      - name: Push git
-        run: git push
+      # - name: Push git
+      #   run: git push
