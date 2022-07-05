@@ -1,5 +1,5 @@
-const { ipcRenderer } = require('electron');
 
+const { ipcRenderer } = require('electron');
 const select = selector => document.querySelector(selector)
 
 let container = select('#messages')
