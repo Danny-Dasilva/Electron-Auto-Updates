@@ -1,4 +1,4 @@
-name: Deploy Versioned Branch to AWS Production EC2
+name: "🚀 Release Electron app"
 
 on: push
 
@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-
+    if: "startsWith(github.event.head_commit.message, 'v')"
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
