@@ -1,0 +1,13 @@
+appId: com.electron.autoupdater
+productName: 'ElectronAutoUpdates Canary'
+mac:
+  category: public.app-category.developer-tools
+  icon: 'build/icon-canary.icns'
+win:
+  icon: 'build/icon-canary.ico'
+  
+# will override properties in package.json
+extraMetadata:
+    productName: 'ElectronAutoUpdates Canary'
+    # we read this value from package.json to set the feedURL of autoUpdater 
+    updateServerHost: 'browserx-canary-download.herokuapp.com'
