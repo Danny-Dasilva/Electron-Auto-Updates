@@ -46,13 +46,6 @@ jobs:
               npm version patch -m "v%s"
           fi
 
-
-      # - name: Add file (THESE TWO ACTIONS GET DONE BY THE PATCH COMMAND)
-      #   run: git add *
-      # - name: Commit Version Bump
-      #   run: git commit -a -m "v${{ env.UPDATED_VERSION }}""
-      # - name: Tag commit
-      #   run: git tag v${{ env.UPDATED_VERSION }}
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
@@ -62,7 +55,7 @@ jobs:
 
           # If the commit is tagged with a version (e.g. "v1.0.0"),
           # release the app after building
-          # release: ${{ startsWith(github.ref, 'refs/tags/v') }}
           release: True
+
       - name: Push git
         run: git push && git push --tags
