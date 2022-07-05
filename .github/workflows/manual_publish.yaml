@@ -7,7 +7,7 @@ on:
         description: "Release Candidate"
         required: true
         default: "patch"
-obs:
+jobs:
   release:
     name: 🚀 Manual publish
    runs-on: ${{ matrix.os }}
