@@ -25,8 +25,7 @@
       "category": "Office"
     },
     "win": {
-      "target": "nsis",
-      "arch": ["arm64", "x64"]
+      "target": "nsis"
     },
     "publish": {
       "provider": "github",
